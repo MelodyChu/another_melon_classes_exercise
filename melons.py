@@ -11,6 +11,8 @@ class AbstractMelonOrder(object):
         self.shipped = False
         # if country_code:
         #     self.country_code = country_code
+        if self.qty > 100:
+            raise TooManyMelonsError("No more than 100 melons you melonphile!")
 
     def get_base_price(self):
         """ generates random base price for splurge pricing"""
@@ -75,9 +77,6 @@ class InternationalMelonOrder(AbstractMelonOrder):
 
         return self.country_code
 
-# class TooManyMelonsError(ValueError):
-#     """ raise error if too many melons declared """
-#     def __init__(self, qty):
-#         self.qty = qty
-#     if self.qty > 100:
-#         raise
+class TooManyMelonsError(ValueError):
+    """ raise error if too many melons declared """
+    pass
